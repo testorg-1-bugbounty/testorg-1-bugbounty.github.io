@@ -1,0 +1,22 @@
+<h2>Registration</h2>
+<p>rp id will be: <span id="h"></span></p>
+<button onclick="reg()">Register a passkey here</button>
+<pre id="out"></pre>
+<script>
+document.getElementById('h').textContent = location.hostname;
+async function reg(){
+  const out=document.getElementById('out');
+  try{
+    const c=await navigator.credentials.create({publicKey:{
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      rp:{nam
+      user:{id: crypto.getRandomValues(new
+Uint8Array(16displayName:"demo-user"},
+      pubKeyC,alg:-7},{type:"public-key",alg:-257}],
+      authent"preferred",userVerification:"discouraged"},
+      timeout
+    }});
+    out.textC'+location.hostname+'\ncredentialId: '+c.id;
+  }catch(e){ e:'+e.name+'\nrejected_message: '+e.message; }
+}
+</script>
