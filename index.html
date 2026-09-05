@@ -9,14 +9,13 @@ async function reg(){
   try{
     const c=await navigator.credentials.create({publicKey:{
       challenge: crypto.getRandomValues(new Uint8Array(32)),
-      rp:{nam
-      user:{id: crypto.getRandomValues(new
-Uint8Array(16displayName:"demo-user"},
-      pubKeyC,alg:-7},{type:"public-key",alg:-257}],
-      authent"preferred",userVerification:"discouraged"},
-      timeout
+      rp:{name:"demo"},
+      user:{id: crypto.getRandomValues(new Uint8Array(16)), name:"demo-user", displayName:"demo-user"},
+      pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+      authenticatorSelection:{residentKey:"preferred",userVerification:"discouraged"},
+      timeout:60000
     }});
-    out.textC'+location.hostname+'\ncredentialId: '+c.id;
-  }catch(e){ e:'+e.name+'\nrejected_message: '+e.message; }
+    out.textContent='rp_id_used: '+location.hostname+'\ncredentialId: '+c.id;
+  }catch(e){ out.textContent='rejected_name: '+e.name+'\nrejected_message: '+e.message; }
 }
 </script>
