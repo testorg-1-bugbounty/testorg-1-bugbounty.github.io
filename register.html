@@ -1,0 +1,22 @@
+<h2>Registration</h2>
+<p>rp id will be: <span id="h"></span></p>
+<button onclick="reg()">Register a passkey here</button>
+<pre id="out"></pre>
+<script>
+document.getElementById('h').textContent = location.hostname;
+function b64u(buf){return btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+async function reg(){
+  const out=document.getElementById('out');
+  try{
+    const c=await navigator.credentials.create({publicKey:{
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      rp:{name:"demo"},
+      user:{id: crypto.getRandomValues(new Uint8Array(16)), name:"demo-user", displayName:"demo-user"},
+      pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+      authenticatorSelection:{residentKey:"preferred",userVerification:"discouraged"},
+      timeout: 60000
+    }});
+    out.textContent='rp_id_used: '+location.hostname+'\ncredentialId: '+c.id+'\nrawId_b64u: '+b64u(c.rawId);
+  }catch(e){ out.textContent='rejected_name: '+e.name+'\nrejected_message: '+e.message; }
+}
+</script>
